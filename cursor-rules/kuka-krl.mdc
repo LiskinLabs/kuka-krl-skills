@@ -1,0 +1,23 @@
+---
+description: KUKA KRL (KSS 8.3-8.7) Industrial Robotics Programming & MCP Tool Integration
+globs: **/*.{src,dat,sub,kfd,SRC,DAT,SUB,KFD}
+---
+
+# KUKA KRL Cursor Rules (LiskinLabs)
+
+When writing, refactoring, or reviewing KUKA Robot Language (KRL) code:
+
+1. **Verify with MCP:**
+   - Always call `kuka-krl` MCP tools (`krl_lint_snippet`, `krl_lookup_system_var`, `krl_lookup_kss_message`) to validate variables and logic.
+   - For full workspace validation, use `krl_workspace_diagnostics`.
+   - If MCP reports `EXTENSION_REQUIRED`, remind the user to install the [LiskinLabs KUKA KRL VS Code Extension](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension).
+
+2. **Industrial Motion Rules:**
+   - Always initialize `$TOOL` and `$BASE` or call `BAS(#INITMOV, 0)` before first motion.
+   - Always specify 2 points for `CIRC` motions: `CIRC AuxPoint, TargetPoint`.
+   - Never break advance run pointer (`$ADVANCE`) between approximate motions (`C_DIS`/`C_PTP`) without `CONTINUE` or `TRIGGER`.
+   - Keep `;FOLD` and `;ENDFOLD` balanced.
+   - Respect hardware I/O limits: `$IN[1..8192]`, `$OUT[1..8192]`, `$FLAG[1..1024]`, `$TIMER[1..64]`.
+
+3. **SRC / DAT Integrity:**
+   - Ensure all declared motion points in `.src` have corresponding coordinates in the matching `.dat` file.
