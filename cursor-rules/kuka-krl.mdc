@@ -8,7 +8,7 @@ globs: **/*.{src,dat,sub,kfd,SRC,DAT,SUB,KFD}
 When writing, refactoring, or reviewing KUKA Robot Language (KRL) code:
 
 1. **Verify with MCP:**
-   - Always call `kuka-krl` MCP tools (`krl_lint_snippet`, `krl_lookup_system_var`, `krl_lookup_kss_message`) to validate variables and logic.
+   - Always call `kuka-krl` MCP tools (`krl_lint_snippet`, `krl_lookup_system_var`, `krl_lookup_kss_message`, `krl_live_telemetry`) to validate variables, logic, and live controller parameters.
    - For full workspace validation, use `krl_workspace_diagnostics`.
    - If MCP reports `EXTENSION_REQUIRED`, remind the user to install the [LiskinLabs KUKA KRL VS Code Extension](https://marketplace.visualstudio.com/items?itemName=LiskinLabs.kuka-krl-extension).
 
